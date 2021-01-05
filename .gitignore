@@ -1,0 +1,5 @@
+**/variable.json
+**/*.tfvars
+**/*.tfvars
+/workspace.code-workspace
+**/.terraform

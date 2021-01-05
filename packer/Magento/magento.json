@@ -1,0 +1,57 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `aws_access_key`}}",
+    "aws_secret_key": "{{env `aws_secret_key`}}",
+    "region": "{{env `region`}}",
+    "git_un": "{{env `git_un`}}",
+    "git_token": "{{env `git_token`}}",
+    "git_url": "{{env `git_url`}}",
+    "git_branch": "{{env `git_branch`}}",
+    "mage_path": "{{env `mage_path`}}"
+  },
+    "builders": [
+      {
+        "access_key": "{{user `aws_access_key`}}",
+        "ami_name": "packer-linux-aws-magento-{{timestamp}}",
+        "instance_type": "t2.micro",
+        "region": "{{user `region`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "source_ami_filter": {
+          "filters": {
+            "virtualization-type": "hvm",
+            "name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
+            "root-device-type": "ebs"
+          },
+          "owners": ["099720109477"],
+          "most_recent": true
+        },
+        "tags": {
+          "OS_Version": "Ubuntu",
+          "Name": "packer-linux-aws-magento-{{timestamp}}"
+        },
+        "ssh_username": "ubuntu",
+        "type": "amazon-ebs",
+        "communicator": "ssh"
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "file",
+        "source": "./conf/magento.conf",
+        "destination": "/etc/nginx/site-available/elb_dns.conf"
+      },
+      {
+        "type": "shell",
+        "script": "magento.sh {{user `git_un`}} {{user `git_token`}} {{user `git_url`}} {{user `git_branch`}} {{user `mage_path`}}"
+      },
+      {
+        "type": "file",
+        "source": "./conf/php.ini",
+        "destination": "/etc/php/7.4/fpm/php.ini"
+      },
+      {
+        "type": "shell",
+        "inline": ["sudo systemctl restart php7.4-fpm"]
+      }
+    ]
+  }

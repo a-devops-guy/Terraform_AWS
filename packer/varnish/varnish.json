@@ -1,0 +1,48 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `aws_access_key`}}",
+    "aws_secret_key": "{{env `aws_secret_key`}}",
+    "region": "{{env `region`}}"
+  },
+    "builders": [
+      {
+        "access_key": "{{user `aws_access_key`}}",
+        "ami_name": "packer-linux-aws-varnish-{{timestamp}}",
+        "instance_type": "t2.micro",
+        "region": "{{user `region`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "source_ami_filter": {
+          "filters": {
+            "virtualization-type": "hvm",
+            "name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
+            "root-device-type": "ebs"
+          },
+          "owners": ["099720109477"],
+          "most_recent": true
+        },
+        "tags": {
+          "OS_Version": "Ubuntu",
+          "Name": "packer-linux-aws-varnish-{{timestamp}}"
+        },
+        "ssh_username": "ubuntu",
+        "type": "amazon-ebs",
+        "communicator": "ssh"
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "file",
+        "source": "./conf/elb_dns.conf",
+        "destination": "/etc/nginx/site-available/elb_dns.conf"
+      },
+      {
+        "type": "file",
+        "source": "./conf/varnish_prd.vcl",
+        "destination": "/etc/nginx/site-available/elb_dns.conf"
+      },
+      {
+        "type": "shell",
+        "script": "varnish.sh"
+      }
+    ]
+  }
