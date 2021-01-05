@@ -31,27 +31,31 @@
         },
         "ssh_username": "ubuntu",
         "type": "amazon-ebs",
-        "communicator": "ssh"
+        "ssh_keypair_name":"test",
+        "ssh_private_key_file":"test.pem"
       }
     ],
     "provisioners": [
       {
         "type": "file",
-        "source": "./conf/magento.conf",
-        "destination": "/etc/nginx/site-available/elb_dns.conf"
-      },
-      {
-        "type": "shell",
-        "script": "magento.sh {{user `git_un`}} {{user `git_token`}} {{user `git_url`}} {{user `git_branch`}} {{user `mage_path`}}"
+        "source": "./conf/php.ini",
+        "destination": "/home/ubuntu/php.ini"
       },
       {
         "type": "file",
-        "source": "./conf/php.ini",
-        "destination": "/etc/php/7.4/fpm/php.ini"
+        "source": "./conf/magento.conf",
+        "destination": "/home/ubuntu/magento.conf"
       },
       {
         "type": "shell",
-        "inline": ["sudo systemctl restart php7.4-fpm"]
+        "environment_vars": [
+          "GIT_UN={{user `git_un`}}",
+          "GIT_TOKEN={{user `git_token`}}",
+          "GIT_URL={{user `git_url`}}",
+          "GIT_BRANCH={{user `git_branch`}}",
+          "MAGE_PATH={{user `mage_path`}}"
+        ],
+        "script": "magento.sh"
       }
     ]
   }

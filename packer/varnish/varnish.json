@@ -26,19 +26,20 @@
         },
         "ssh_username": "ubuntu",
         "type": "amazon-ebs",
-        "communicator": "ssh"
+        "ssh_keypair_name":"test",
+        "ssh_private_key_file":"test.pem"
       }
     ],
     "provisioners": [
       {
         "type": "file",
         "source": "./conf/elb_dns.conf",
-        "destination": "/etc/nginx/site-available/elb_dns.conf"
+        "destination": "/home/ubuntu/elb_dns.conf"
       },
       {
         "type": "file",
         "source": "./conf/varnish_prd.vcl",
-        "destination": "/etc/nginx/site-available/elb_dns.conf"
+        "destination": "/home/ubuntu/varnish_prd.vcl"
       },
       {
         "type": "shell",

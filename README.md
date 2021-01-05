@@ -1,5 +1,5 @@
 # Terraform_AWS
 
-##WIP
+## WIP
 
-###AWS architecture for vue storefront open source eccommerce usaing packer, terraform and ansible
+### AWS architecture for vue storefront open source eccommerce using packer, terraform and ansible
