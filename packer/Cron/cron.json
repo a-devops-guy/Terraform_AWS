@@ -7,7 +7,7 @@
     "git_token": "{{env `git_token`}}",
     "git_url": "{{env `git_url`}}",
     "git_branch": "{{env `git_branch`}}",
-    "vue_api_path": "{{env `vue_api_path`}}"
+    "path": "{{env `path`}}"
   },
     "builders": [
       {
@@ -37,15 +37,36 @@
     ],
     "provisioners": [
       {
+        "type": "file",
+        "source": "./conf/php.ini",
+        "destination": "/home/ubuntu/php.ini"
+      },
+      {
+        "type": "file",
+        "source": "./conf/magento.conf",
+        "destination": "/home/ubuntu/magento.conf"
+      },
+      {
         "type": "shell",
         "environment_vars": [
           "GIT_UN={{user `git_un`}}",
           "GIT_TOKEN={{user `git_token`}}",
           "GIT_URL={{user `git_url`}}",
           "GIT_BRANCH={{user `git_branch`}}",
-          "VUE_API_PATH={{user `vue_api_path`}}"
+          "PATH={{user `path`}}"
         ],
-        "script": "API.sh"
+        "script": "magento.sh"
+      },
+      {
+        "type": "shell",
+        "environment_vars": [
+          "GIT_UN={{user `git_un`}}",
+          "GIT_TOKEN={{user `git_token`}}",
+          "GIT_URL={{user `git_url`}}",
+          "GIT_BRANCH={{user `git_branch`}}",
+          "PATH={{user `path`}}"
+        ],
+        "script": "Storefront.sh"
       }
     ]
   }

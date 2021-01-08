@@ -17,8 +17,8 @@ sudo apt-get install python2 -y
 sudo apt-get remove python3 -y
 
 sudo su
-sudo mkdir $VUE_API_PATH/vue-sf-api
-cd $VUE_API_PATH/vue-sf-api
+sudo mkdir $VUE_SF_PATH/vue-sf-api
+cd $VUE_SF_PATH/vue-sf-api
 sudo git init
 sudo git remote add origin https://$GIT_UN:$GIT_TOKEN@$GIT_URL
 sudo git pull origin $GIT_BRANCH 

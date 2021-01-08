@@ -6,5 +6,5 @@
     "git_token": "",
     "git_url": "",
     "git_branch": "",
-    "mage_path": "/var/www"
+    "vue_api_path": "/var/www"
 }
