@@ -4,7 +4,7 @@
     "region": "us-east-1",
     "git_un": "",
     "git_token": "",
-    "git_url": "github.com/magento/magento2.git",
-    "git_branch": "2.4.2-regression",
+    "git_url": "",
+    "git_branch": "",
     "path": "/var/www"
 }
