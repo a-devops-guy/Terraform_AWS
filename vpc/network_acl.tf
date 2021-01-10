@@ -1,14 +1,9 @@
 locals {
   nacl_rules = [
-    { port : var.SF_PORT,   rule_num : 100, cidr : "0.0.0.0/0" },
-    { port : var.API_PORT,   rule_num : 110, cidr : "0.0.0.0/0" },
-    { port : var.HTTPS,  rule_num : 120, cidr : "0.0.0.0/0" },
-    { port : var.MYSQL_PORT,  rule_num : 130, cidr : aws_subnet.private_az1.cidr_block },
-    { port : var.REDIS_PORT,  rule_num : 140, cidr : aws_subnet.private_az1.cidr_block },
-    { port : var.RABBITMQ_PORT,  rule_num : 150, cidr : aws_subnet.private_az1.cidr_block },
-    { port : var.MYSQL_PORT,  rule_num : 130, cidr : aws_subnet.private_az2.cidr_block },
-    { port : var.REDIS_PORT,  rule_num : 140, cidr : aws_subnet.private_az2.cidr_block },
-    { port : var.RABBITMQ_PORT,  rule_num : 150, cidr : aws_subnet.private_az2.cidr_block }
+    { port : var.HTTPS,   rule_num : 101, cidr : aws_subnet.private_az1.cidr_block },
+    { port : var.HTTPS,   rule_num : 102, cidr : aws_subnet.private_az2.cidr_block },
+    { port : var.HTTPS,   rule_num : 103, cidr : aws_subnet.public_az1.cidr_block },
+    { port : var.HTTPS,   rule_num : 104, cidr : aws_subnet.public_az2.cidr_block }
   ]
 }
 
@@ -56,12 +51,20 @@ resource "aws_default_network_acl" "default" {
 
 locals {
   nacl_pvt_rules = [
-    { port : var.MYSQL_PORT,  rule_num : 130, cidr : aws_subnet.public_az1.cidr_block },
-    { port : var.REDIS_PORT,  rule_num : 140, cidr : aws_subnet.public_az1.cidr_block },
-    { port : var.RABBITMQ_PORT,  rule_num : 150, cidr : aws_subnet.public_az1.cidr_block },
-    { port : var.MYSQL_PORT,  rule_num : 130, cidr : aws_subnet.public_az2.cidr_block },
-    { port : var.REDIS_PORT,  rule_num : 140, cidr : aws_subnet.public_az2.cidr_block },
-    { port : var.RABBITMQ_PORT,  rule_num : 150, cidr : aws_subnet.public_az2.cidr_block }
+    { port : var.SF_PORT,   rule_num : 101, cidr : aws_subnet.private_az1.cidr_block },
+    { port : var.SF_PORT,   rule_num : 102, cidr : aws_subnet.private_az2.cidr_block },
+    { port : var.API_PORT,   rule_num : 201, cidr : aws_subnet.private_az1.cidr_block },
+    { port : var.API_PORT,   rule_num : 202, cidr : aws_subnet.private_az2.cidr_block },
+    { port : var.HTTPS,   rule_num : 301, cidr : aws_subnet.private_az1.cidr_block },
+    { port : var.HTTPS,   rule_num : 302, cidr : aws_subnet.private_az2.cidr_block },
+    { port : var.HTTPS,   rule_num : 301, cidr : aws_subnet.public_az1.cidr_block },
+    { port : var.HTTPS,   rule_num : 302, cidr : aws_subnet.public_az2.cidr_block },
+    { port : var.MYSQL_PORT,  rule_num : 401, cidr : aws_subnet.private_az1.cidr_block },
+    { port : var.MYSQL_PORT,  rule_num : 402, cidr : aws_subnet.private_az2.cidr_block },
+    { port : var.REDIS_PORT,  rule_num : 501, cidr : aws_subnet.private_az1.cidr_block },
+    { port : var.REDIS_PORT,  rule_num : 502, cidr : aws_subnet.private_az2.cidr_block },
+    { port : var.RABBITMQ_PORT,  rule_num : 601, cidr : aws_subnet.private_az1.cidr_block },
+    { port : var.RABBITMQ_PORT,  rule_num : 602, cidr : aws_subnet.private_az2.cidr_block }
   ]
 }
 

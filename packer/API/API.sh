@@ -32,3 +32,6 @@ sudo yarn build
 cd /home/kiran/$VUE_API_PATH/vue-sf-api
 sudo yarn build
 sudo yarn start
+
+sudo systemctl disable cron
+sudo systemctl stop cron

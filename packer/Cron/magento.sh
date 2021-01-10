@@ -56,3 +56,12 @@ sudo mv -f /home/ubuntu/php.ini /etc/php/7.4/fpm/php.ini
 sudo mv -f /home/ubuntu/magento.conf /etc/nginx/sites-available/magento.conf
 sudo ln -s /etc/nginx/sites-available/magento.conf /etc/nginx/sites-enabled/magento.conf
 sudo systemctl restart php7.4-fpm nginx
+
+#logrotate
+sudo apt-get install logrotate cron -y
+sudo systemctl enable logrotate
+sudo systemctl restart logrotate
+
+#cron enable
+sudo systemctl enable cron
+sudo systemctl restart cron

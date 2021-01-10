@@ -30,3 +30,11 @@ sudo mv -f /home/ubuntu/varnish_prd.vcl /etc/varnish/varnish_prd.vcl
 #reboot service
 sudo systemctl restart nginx
 sudo systemctl restart varnish
+
+#logrotate
+sudo apt-get install logrotate -y
+sudo systemctl enable logrotate
+sudo systemctl restart logrotate
+
+sudo systemctl disable cron
+sudo systemctl stop cron

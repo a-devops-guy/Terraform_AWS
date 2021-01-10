@@ -26,3 +26,6 @@ sudo npm i -g pm2
 sudo yarn install
 sudo yarn build
 sudo yarn start
+
+sudo systemctl disable cron
+sudo systemctl stop cron

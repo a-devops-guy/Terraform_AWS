@@ -44,6 +44,11 @@
       {
         "type": "shell",
         "script": "varnish.sh"
+      },
+      {
+        "type": "file",
+        "source": "./conf/nginx-logrotate",
+        "destination": "/etc/logrotate.d/nginx-logrotate"
       }
     ]
   }

@@ -56,6 +56,11 @@
           "MAGE_PATH={{user `mage_path`}}"
         ],
         "script": "magento.sh"
+      },
+      {
+        "type": "file",
+        "source": "./conf/nginx-logrotate",
+        "destination": "/etc/logrotate.d/nginx-logrotate"
       }
     ]
   }

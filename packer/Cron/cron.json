@@ -67,6 +67,16 @@
           "PATH={{user `path`}}"
         ],
         "script": "Storefront.sh"
+      },
+      {
+        "type": "file",
+        "source": "./conf/nginx-logrotate",
+        "destination": "/etc/logrotate.d/nginx-logrotate"
+      },
+      {
+        "type": "file",
+        "source": "./conf/50-default.conf",
+        "destination": "/etc/rsyslog.d/50-default.conf"
       }
     ]
   }

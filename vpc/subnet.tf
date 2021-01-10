@@ -1,4 +1,4 @@
-#public subnet - us-east-1a
+#public subnet - us-east-1a - nginx/varnish
 resource "aws_subnet" "public_az1" {
     availability_zone = "us-east-1a"
     cidr_block = "192.168.1.0/24"
@@ -30,7 +30,7 @@ resource "aws_subnet" "private_az1" {
     }
 }
 
-#public subnet - us-east-1b
+#public subnet - us-east-1b - nginx/varnish
 resource "aws_subnet" "public_az2" {
     availability_zone = "us-east-1b"
     cidr_block = "192.168.2.0/24"
