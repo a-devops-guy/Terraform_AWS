@@ -50,5 +50,16 @@
         "source": "./conf/nginx-logrotate",
         "destination": "/etc/logrotate.d/nginx-logrotate"
       }
+    ],
+    "post-processors": [
+      {
+        "type": "manifest",
+        "output": "manifest.json",
+        "strip_path": true,
+        "custom_data": {
+          "ami name": "API",
+          "Timestamp": "{{timestamp}}"
+        }
+      }
     ]
   }
