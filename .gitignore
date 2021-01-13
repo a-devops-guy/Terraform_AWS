@@ -1,6 +1,3 @@
-**/variable.json
-**/*.tfvars
-**/*.tfvars
-/workspace.code-workspace
 **/.terraform
-**/*.pem
+**/.terraform.lock.hcl
+**/*.tfvars
