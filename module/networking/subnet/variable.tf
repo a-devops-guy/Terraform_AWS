@@ -1,17 +1,13 @@
-variable "private_subnet_az" {
+variable "vpc_id" {
     type = string
 }
 
-variable "private_subnet_cidr_block" {
-    type = string
-}
-
-variable "public_subnet_az" {
-    type = string
-}
-
-variable "public_subnet_cidr_block" {
-    type = string
+variable "subnets" {
+    type = list(object({
+    subnet_az = string
+    subnet_cidr_block = string
+    public = bool
+  }))
 }
 
 variable "environment" {

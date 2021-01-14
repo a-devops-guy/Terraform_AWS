@@ -1,31 +1,19 @@
-module "vpc" {
-    source = "../vpc"
-}
 
-resource "aws_subnet" "public_subnet" {
-    availability_zone = var.public_subnet_az
-    cidr_block = var.public_subnet_cidr_block
-    vpc_id = module.vpc.vpc_id
-    map_public_ip_on_launch = true
-    assign_ipv6_address_on_creation = false
-
-    tags = {
-        "Name" = "${var.environment}-public"
-        "Environment" = var.environment
-        "Subnet Type" = "Public"
+resource "aws_subnet" "subnet" {
+    for_each = { for subnet in var.subnets:
+            subnet.subnet_cidr_block => subnet
     }
-}
 
-resource "aws_subnet" "private_subnet" {
-    availability_zone = var.private_subnet_az
-    cidr_block = var.private_subnet_cidr_block
-    vpc_id = module.vpc.vpc_id
-    map_public_ip_on_launch = false
+    availability_zone = each.value.subnet_az
+    cidr_block = each.value.subnet_cidr_block
+    vpc_id = var.vpc_id
+    
+    map_public_ip_on_launch = each.value.public
     assign_ipv6_address_on_creation = false
 
     tags = {
-        "Name" = "${var.environment}-private"
+        "Name" = "${each.value.subnet_az}-${var.environment}"
         "Environment" = var.environment
-        "Subnet Type" = "Private"
+        "Public" = each.value.public
     }
 }
