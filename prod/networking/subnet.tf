@@ -2,7 +2,7 @@ module "subnet" {
   source = "../../module/networking/subnet"
   
   #tagging
-  environment = "Production"
+  environment = var.environment
 
   #subnet.tf
   vpc_id = module.vpc.vpc_id
