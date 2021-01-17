@@ -29,3 +29,7 @@ output "public_route_table_id" {
 output "private_route_table_id" {
   value = module.rt_private.private_route_table_id
 }
+
+# output "public_subnet_cidr" {
+#   value = [for s in data.aws_subnet.public_subnet: s.cidr_block]
+# }
