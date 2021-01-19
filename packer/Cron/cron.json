@@ -1,0 +1,93 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `aws_access_key`}}",
+    "aws_secret_key": "{{env `aws_secret_key`}}",
+    "region": "{{env `region`}}",
+    "git_un": "{{env `git_un`}}",
+    "git_token": "{{env `git_token`}}",
+    "git_url": "{{env `git_url`}}",
+    "git_branch": "{{env `git_branch`}}",
+    "path": "{{env `path`}}"
+  },
+    "builders": [
+      {
+        "access_key": "{{user `aws_access_key`}}",
+        "ami_name": "packer-linux-aws-magento-{{timestamp}}",
+        "instance_type": "t2.micro",
+        "region": "{{user `region`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "source_ami_filter": {
+          "filters": {
+            "virtualization-type": "hvm",
+            "name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
+            "root-device-type": "ebs"
+          },
+          "owners": ["099720109477"],
+          "most_recent": true
+        },
+        "tags": {
+          "OS_Version": "Ubuntu",
+          "Name": "packer-linux-aws-magento-{{timestamp}}"
+        },
+        "ssh_username": "ubuntu",
+        "type": "amazon-ebs",
+        "ssh_keypair_name":"test",
+        "ssh_private_key_file":"test.pem"
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "file",
+        "source": "./conf/php.ini",
+        "destination": "/home/ubuntu/php.ini"
+      },
+      {
+        "type": "file",
+        "source": "./conf/magento.conf",
+        "destination": "/home/ubuntu/magento.conf"
+      },
+      {
+        "type": "shell",
+        "environment_vars": [
+          "GIT_UN={{user `git_un`}}",
+          "GIT_TOKEN={{user `git_token`}}",
+          "GIT_URL={{user `git_url`}}",
+          "GIT_BRANCH={{user `git_branch`}}",
+          "PATH={{user `path`}}"
+        ],
+        "script": "magento.sh"
+      },
+      {
+        "type": "shell",
+        "environment_vars": [
+          "GIT_UN={{user `git_un`}}",
+          "GIT_TOKEN={{user `git_token`}}",
+          "GIT_URL={{user `git_url`}}",
+          "GIT_BRANCH={{user `git_branch`}}",
+          "PATH={{user `path`}}"
+        ],
+        "script": "Storefront.sh"
+      },
+      {
+        "type": "file",
+        "source": "./conf/nginx-logrotate",
+        "destination": "/etc/logrotate.d/nginx-logrotate"
+      },
+      {
+        "type": "file",
+        "source": "./conf/50-default.conf",
+        "destination": "/etc/rsyslog.d/50-default.conf"
+      }
+    ],
+    "post-processors": [
+      {
+        "type": "manifest",
+        "output": "manifest.json",
+        "strip_path": true,
+        "custom_data": {
+          "ami name": "API",
+          "Timestamp": "{{timestamp}}"
+        }
+      }
+    ]
+  }
