@@ -19,4 +19,3 @@ variable "ntp_servers" {
 variable "vpc_cidr_block" {
     type = string
 }
-

@@ -1,5 +1,6 @@
 resource "aws_subnet" "subnet" {
-    for_each = { for subnet in var.subnets:
+    for_each = { 
+        for subnet in var.subnets:
             subnet.subnet_cidr_block => subnet
     }
 
@@ -11,7 +12,7 @@ resource "aws_subnet" "subnet" {
     assign_ipv6_address_on_creation = false
 
     tags = {
-        "Name" = "${each.value.subnet_az}-${var.environment}"
+        "Name" = "${each.value.name}-${var.environment}-${each.value.subnet_az}"
         "Environment" = var.environment
         "Public" = each.value.public == true ? true : false
     }

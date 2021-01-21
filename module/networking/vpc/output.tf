@@ -10,6 +10,10 @@ output "vpc_default_rt" {
     value = aws_vpc.vpc.default_route_table_id
 }
 
+output "vpc_default_nacl" {
+    value = aws_vpc.vpc.default_network_acl_id
+}
+
 output "environment" {
     value = var.environment
 }

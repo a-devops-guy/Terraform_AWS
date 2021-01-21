@@ -6,4 +6,5 @@
 **/*.pem
 **/*.log
 **/*.tfstate.backup
+**/*.tfstate.*.backup
 **/*.tfstate

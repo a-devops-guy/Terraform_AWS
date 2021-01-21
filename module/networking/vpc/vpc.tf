@@ -4,7 +4,7 @@ resource "aws_vpc" "vpc" {
     enable_dns_hostnames = false
 
     tags = {
-        Name = "${var.environment}-dhcp"
+        Name = "${var.environment}-vpc"
         Environment = "${var.environment}"
     }
 }

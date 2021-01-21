@@ -7,6 +7,7 @@ variable "subnets" {
     subnet_az = string
     subnet_cidr_block = string
     public = bool
+    name = string
   }))
 }
 
