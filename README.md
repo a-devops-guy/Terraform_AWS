@@ -10,7 +10,7 @@
 2. lambda function to start and start ec instance 
 3. python script for rabbitmq producer and consumer
 4. create a pipeline using aws/devops tools
-5. need to make few changes to terraform custom modules to make this more dynamic and user-friendly to build a multi az HA archituture for vue storefront project 
+5. need to make few changes to terraform custom modules to make this more dynamic and user-friendly to build a multi az HA or single az lower environment archituture for vue storefront project
 
 ### Architecture Diagram
 ![alt text](https://github.com/a-devops-guy/Terraform_AWS/blob/master/aws.png)
