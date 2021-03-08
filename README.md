@@ -5,7 +5,7 @@
 ### AWS architecture for vue storefront open source eccommerce using packer, terraform and ansible
 
 
-###Work Pending:
+### Work Pending:
 1. cloudflare & data sync setting to sync media files from magento BO node to S3 and make sf to access static content from  cloudfront (s3) endpoint
 2. lambda function to start and start ec instance 
 3. python script for rabbitmq producer and consumer
