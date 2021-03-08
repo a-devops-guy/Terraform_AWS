@@ -1,0 +1,14 @@
+**/variable.json
+**/*.tfvars
+**/*.terraform.lock.hcl
+/workspace.code-workspace
+**/.terraform
+**/*.pem
+**/*.log
+**/*.tfstate.backup
+**/*.tfstate.lock.info
+**/*.tfstate.*.backup
+**/*.tfstate
+plan
+policy.json
+**/*.ppk
