@@ -1,9 +1,6 @@
 # Terraform_AWS
 
-## 90% of work is completed
-
 ### AWS architecture for vue storefront open source eccommerce using packer, terraform and ansible
-
 
 ### Work Pending:
 1. cloudflare & data sync setting to sync media files from magento BO node to S3 and make sf to access static content from  cloudfront (s3) endpoint
